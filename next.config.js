@@ -1,6 +1,19 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+import { config as dotenv } from 'dotenv'
+import { sizes } from './blocks/Image/sizes'
 
-module.exports = nextConfig
+dotenv();
+
+/** @type {import('next').NextConfig} */
+module.exports = {
+  reactStrictMode: true,
+  publicRuntimeConfig: {
+    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  },
+  images: {
+    domains: [
+      'localhost',
+      // Your domain(s) here
+    ],
+    deviceSizes: sizes,
+  },
+};

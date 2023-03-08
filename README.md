@@ -1,38 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Payload + NextJS Server-Rendered TypeScript Boilerplate
 
-## Getting Started
+This repo contains a boilerplate that'll get you going on a Payload install combined with a NextJS frontend.
 
-First, run the development server:
+When you use Payload, you plug it into _**your**_ Express server. That's a fundamental difference between Payload and other CMS / application frameworks. It means that when you use Payload, you're adding Payload to your app, and not building a "Payload app".
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+One of the strengths of this pattern is that it lets you do powerful things like combining your Payload CMS directly with a custom NextJS server. With this pattern, you can host your Payload CMS as well as a fully dynamic, CMS-integrated NextJS site right on one host—while still getting all of the benefits of a headless CMS.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**This boilerplate demonstrates the following:**
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- How to build a TypeScript Payload + NextJS project
+- How to use Payload's Uploads via a Media collection
+- How to seed initial data into your database through Payload's Local API
+- How to build dynamic layouts in React using Payload's Blocks field type
+- How to use Payload field hooks to dynamically generate and format page `slug`s
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## This pattern is great for the following situations
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**1. If your content changes often, or is completely dynamic in nature.**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Static sites are good for sites and apps where their content is typically set in stone at build-time, or does not change often. If your app's content doesn't change often, then taking advantage of a static site generator such as Gatsby or NextJS' static functionality might be a good fit. But, if your content changes constantly, or is completely dynamic, it might make sense to server-render your content instead.
 
-## Learn More
+**2. If your views depend on dynamic data for each load.**
 
-To learn more about Next.js, take a look at the following resources:
+If you need to generate views that depend on user-generated data, or data that changes based on who the authenticated user is, you might choose to server-render your app rather than generate it statically. If you were to go a static route, your site or app would have to do all the heavy lifting on the client side and might miss out on SEO opportunities.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**3. If parts of your app need to be server-rendered, but others are better suited to static generation.**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Commonly, you might use Payload to build full applications - where certain views are statically generated, like pages and posts, but other views are fully dynamic and must be server-rendered—like an account portal or similar. If this describes your application, you can benefit by utilizing NextJS in both a server-rendered and statically generated context. At the same time, you'll benefit from running your Payload app completely within the same NextJS server.
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here is a step-by-step guide for how to use this repo:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone this repo using `git clone --depth=1 https://github.com/fabienwnklr/nextjs-payload.git <YOUR_PROJECT_NAME>`
+1. Run `cp .env.example .env` to create an `.env` file
+1. Fill out your `.env` file with values that describe your environment
+1. Run `yarn` or `npm install`
+1. Run `yarn dev` to open a development environment
+1. Go to [http://localhost:3000/admin](http://localhost:3000/admin) to create your first user
+
+## Building and serving in Production
+
+This repo contains everything you need to both build your project for production purposes as well as serve it after it's been built.
+
+- To build, run `yarn build` or `npm run build`.
+- To serve, run `yarn serve` or `npm run serve`.
+
+### This boilerplate is not for all NextJS projects
+
+We will be releasing more boilerplates over time, including one for pairing Payload with a statically generated NextJS site. If you don't need NextJS' server rendering, you should go fully static.
